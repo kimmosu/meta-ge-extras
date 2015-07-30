@@ -61,7 +61,7 @@ diff -Naur dhry.orig/Makefile dhry/Makefile
 +++ dhry/Makefile	2015-07-20 14:10:45.832945353 +0300
 @@ -0,0 +1,16 @@
 +CC=gcc
-+CFLAGS=-O0 -std=c89
++CFLAGS=-O3 -Ofast -mcpu=cortex-a9 -DNDEBUG -fomit-frame-pointer -std=c89
 +
 +all: dhry
 +

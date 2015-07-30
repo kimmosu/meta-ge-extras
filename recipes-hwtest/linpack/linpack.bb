@@ -14,7 +14,7 @@ do_unpack() {
 }
 
 do_compile() {
-    ${CC} -O -o linpack linpack.c
+    ${CC} -DNDEBUG -O3 -Ofast -mcpu=cortex-a9 -mfpu=neon-fp16 -o linpack linpack.c
 }
 
 do_install() {
