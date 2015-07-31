@@ -11,7 +11,7 @@ inherit allarch
 
 do_install() {
     install -d ${D}${bindir}
-    install -m644 ${S}/ge-temp-logger.py    ${D}${bindir}
+    install -m755 ${S}/ge-temp-logger.py    ${D}${bindir}
 }
 
 RDEPENS = "python"
