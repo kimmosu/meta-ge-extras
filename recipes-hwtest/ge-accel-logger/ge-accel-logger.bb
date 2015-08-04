@@ -14,4 +14,4 @@ do_install() {
     install -m755 ${S}/ge-accel-logger.py    ${D}${bindir}
 }
 
-RDEPENS = "python"
+RDEPENDS_${PN} = "python"

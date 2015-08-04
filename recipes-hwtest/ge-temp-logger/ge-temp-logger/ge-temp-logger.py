@@ -23,7 +23,7 @@ class MPL3115:
                 raise RuntimeError("Device name mismatch")
         iionames = glob.glob("{0}/iio:device*".format(sysfspath))
         if len(iionames) == 0:
-            raise RuntimeError("Can't find a IIO device")
+            raise RuntimeError("Can't find an IIO device")
         self.iioname = iionames[0]
         self.temperature = -273.15
         self.pressure = 0.0
