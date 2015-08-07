@@ -1,0 +1,30 @@
+From f82b064499ff1326ca7e14208d431149a66498ff Mon Sep 17 00:00:00 2001
+From: Justin Waters <justin.waters@timesys.com>
+Date: Thu, 6 Aug 2015 10:14:00 -0400
+Subject: [PATCH] gpio-generic: Add hack for i.MX6 GPIO reads
+
+---
+ drivers/gpio/gpio-generic.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpio/gpio-generic.c b/drivers/gpio/gpio-generic.c
+index b92a690..b881ced 100644
+--- a/drivers/gpio/gpio-generic.c
++++ b/drivers/gpio/gpio-generic.c
+@@ -139,7 +139,12 @@ static int bgpio_get(struct gpio_chip *gc, unsigned int gpio)
+ {
+ 	struct bgpio_chip *bgc = to_bgpio_chip(gc);
+ 
+-	return !!(bgc->read_reg(bgc->reg_dat) & bgc->pin2mask(bgc, gpio));
++	if (bgc->read_reg(bgc->reg_dir) & (bgc->pin2mask(bgc,gpio)))
++		return !!(bgc->read_reg(bgc->reg_set) & bgc->pin2mask(bgc, gpio));
++	else {
++		return !!(bgc->read_reg(bgc->reg_dat) & bgc->pin2mask(bgc, gpio));
++	}
++
+ }
+ 
+ static void bgpio_set(struct gpio_chip *gc, unsigned int gpio, int val)
+-- 
+2.1.4
+
